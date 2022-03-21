@@ -15,10 +15,10 @@ type notifyFn = func(n Notification, err error)
 
 // Notification reminder notification event
 type Notification struct {
-	ID, Reference string
-	CreatedAt     time.Time
-	Expiration    time.Duration
-	Message       interface{}
+	ID         string
+	CreatedAt  time.Time
+	Expiration time.Duration
+	Message    interface{}
 }
 
 type reminder struct {

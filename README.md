@@ -45,12 +45,6 @@ Uses Redis TTL to create notifications at a specific time, using a shadowed key<
     r.Remind("practice go").At(time.Date(2022, time.April,5, 21, 34, 01, 0, time.UTC))
     ```
 
-## References
-- You can also add some external references to your reminder like:
-    ```
-    r.Remind("practice go").WithReference("coding").At(time.Date(2022, time.April,5, 21, 34, 01, 0, time.UTC))
-    ```
-
 <br>
 <br>
 <br>

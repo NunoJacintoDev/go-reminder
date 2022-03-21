@@ -12,15 +12,8 @@ type envelope struct {
 	s          *reminder
 	message    interface{}
 	id         string
-	reference  string
 	createdAt  time.Time
 	expiration time.Duration
-}
-
-// WithReference adds a reference to your remind note
-func (r *envelope) WithReference(reference string) *envelope {
-	r.reference = reference
-	return r
 }
 
 // At sets the envelope notification to "date"
@@ -62,7 +55,6 @@ func (r *envelope) encode() (data []byte, err error) {
 	toCache := &Notification{
 		ID:         r.id,
 		Message:    r.message,
-		Reference:  r.reference,
 		CreatedAt:  r.createdAt,
 		Expiration: r.expiration,
 	}
