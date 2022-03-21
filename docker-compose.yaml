@@ -1,6 +1,8 @@
 version: "3.7"
 services:
   app:
+    depends_on:
+      - redis
     build:
       context: .
       dockerfile: local.Dockerfile
@@ -8,5 +10,13 @@ services:
       - .:/code
       - .cache/mod:/go/pkg/mod
     working_dir: /code
+    environment:
+      # Redis Cache
+      REDIS_URL: "redis://redis:6379"
 
+  redis:
+    image: redis
+    hostname: redis
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
 
