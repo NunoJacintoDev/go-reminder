@@ -11,6 +11,7 @@ Uses Redis TTL to create notifications at a specific time, using a shadowed key<
 - <small>(*why the shadowed key strategy: https://stackoverflow.com/questions/18328058/redis-notifications-get-key-and-value-on-expiration
 </small>)
 
+![shadow key approach](/assets/shadow_key.png "shadow_key_approach")
 
 <br>
 <br>
