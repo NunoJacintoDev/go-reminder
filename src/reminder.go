@@ -61,6 +61,16 @@ func (s *reminder) Remind(message interface{}) *envelope {
 	}
 }
 
+// RemindAt creates a reminder with the incoming "message" to be published at date
+func (s *reminder) RemindAt(message interface{}, date time.Time) error {
+	return s.Remind(message).At(date)
+}
+
+// RemindIn creates a reminder with the incoming "message" to be published after duration
+func (s *reminder) RemindIn(message interface{}, duration time.Duration) error {
+	return s.Remind(message).In(duration)
+}
+
 // ---------------------------
 // ----private functions -----
 // ---------------------------
