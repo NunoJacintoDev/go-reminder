@@ -17,6 +17,7 @@ type notifyFn = func(n Notification, err error)
 type Notification struct {
 	ID, Reference string
 	CreatedAt     time.Time
+	Expiration    time.Duration
 	Message       interface{}
 }
 
@@ -82,7 +83,7 @@ func (s *reminder) handlerShadowKeyExpiration(shadowKey string) {
 	}
 	// convert data to note
 	note := []byte(data.(string))
-	n, err := Decode(note)
+	n, err := decode(note)
 	if err != nil {
 		s.notify(n, err)
 		return
