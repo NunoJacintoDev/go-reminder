@@ -11,15 +11,15 @@ import (
 type envelope struct {
 	s          *reminder
 	message    interface{}
-	ID         string
-	Reference  string
-	CreatedAt  time.Time
-	Expiration time.Duration
+	id         string
+	reference  string
+	createdAt  time.Time
+	expiration time.Duration
 }
 
 // WithReference adds a reference to your remind note
 func (r *envelope) WithReference(reference string) *envelope {
-	r.Reference = reference
+	r.reference = reference
 	return r
 }
 
@@ -33,10 +33,10 @@ func (r *envelope) At(date time.Time) (err error) {
 func (r *envelope) In(duration time.Duration) (err error) {
 	r.generateID()
 
-	r.Expiration = duration
+	r.expiration = duration
 
 	// Add shadow key with expiration
-	shadowKey := getShadowKey(r.ID)
+	shadowKey := getShadowKey(r.id)
 	err = r.s.rcs.SetWithExp(shadowKey, nil, duration)
 	if err != nil {
 		return
@@ -49,7 +49,7 @@ func (r *envelope) In(duration time.Duration) (err error) {
 	}
 
 	// Add original with event data
-	err = r.s.rcs.SetWithoutExp(r.ID, data)
+	err = r.s.rcs.SetWithoutExp(r.id, data)
 	if err != nil {
 		return
 	}
@@ -60,11 +60,11 @@ func (r *envelope) encode() (data []byte, err error) {
 	var buf bytes.Buffer
 	enc := gob.NewEncoder(&buf)
 	toCache := &Notification{
-		ID:         r.ID,
+		ID:         r.id,
 		Message:    r.message,
-		Reference:  r.Reference,
-		CreatedAt:  r.CreatedAt,
-		Expiration: r.Expiration,
+		Reference:  r.reference,
+		CreatedAt:  r.createdAt,
+		Expiration: r.expiration,
 	}
 	err = enc.Encode(toCache)
 	if err != nil {
@@ -89,5 +89,5 @@ func decode(data []byte) (n Notification, err error) {
 }
 
 func (r *envelope) generateID() {
-	r.ID = uuid.NewString()
+	r.id = uuid.NewString()
 }

@@ -57,7 +57,7 @@ func (s *reminder) Remind(message interface{}) *envelope {
 	return &envelope{
 		s:         s,
 		message:   message,
-		CreatedAt: time.Now(),
+		createdAt: time.Now(),
 	}
 }
 
