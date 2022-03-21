@@ -3,7 +3,7 @@
 
 <br>
 <br>
-<br>
+
 
 # 🚀 How it works
 Uses Redis TTL to create notifications at a specific time, using a shadowed key<small>(*)</small>, to create a event-driven reminder.
@@ -60,6 +60,7 @@ Uses Redis TTL to create notifications at a specific time, using a shadowed key<
 
 
 # 🚧 What needs to be done
-- Tests for more load
-- Fail recovery would be nice
-- Performance Check and connections
+- Load Testing
+- Test with reminders with big expiration time
+- Fail recovery & Persistent Data (Supervisor)
+- Check Performance  and connections
